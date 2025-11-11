@@ -1,0 +1,47 @@
+{
+  "version": [1, 0],
+  "unpartitioned": {
+    "families": ["absolute"],
+    "permissions": {"secure": "rw","nonsecure": "rw","bootloader": "rw"}
+  },
+  "partitions": [
+    {
+      "name": "Factory Settings",
+      "id": 0,
+      "start": "48K",
+      "size": "128K",
+      "families": ["data"],
+      "permissions": {"secure": "r","nonsecure": "r","bootloader": "r"},
+      "no_reboot_on_uf2_download" : false
+    },
+    {
+      "name": "FOTA-1",
+      "id": 1,
+      "start":"176K",
+      "size": "256K",
+      "families": ["rp2350-arm-s", "rp2350-riscv"],
+      "permissions": {"secure": "rw","nonsecure": "rw","bootloader": "rw"},
+      "link": ["a", 2],
+      "no_reboot_on_uf2_download": false   
+
+    },
+    {    
+      "name": "FOTA-2",
+      "id": 2,
+      "start":"432K",
+      "size": "256K",
+      "families": ["rp2350-arm-s", "rp2350-riscv"],
+      "permissions": {"secure": "rw","nonsecure": "rw","bootloader": "rw"},
+      "link": ["a",1],
+      "no_reboot_on_uf2_download": false   
+    },
+    {
+      "name": "User Flash",
+      "id": 3,
+      "start":"588K",
+      "size": "512K",
+      "families": ["data"],
+      "permissions": {"secure": "rw","nonsecure": "rw","bootloader": "rw"}
+    }
+  ]
+}
